@@ -17,21 +17,17 @@ def send_ready_for_booking_message(bot: Bot, chat_id: int, user_city: str):
         ],
         [
             InlineKeyboardButton('📝 My bookings', callback_data='📝 My bookings'),
-            InlineKeyboardButton('🏙 Change city', callback_data='🏙 Change city')
+            InlineKeyboardButton('🏙 Change city', callback_data='change_city')
         ]
     ])
 
     bot.send_message(
         chat_id=chat_id,
-        text=f'Я готов забронировать 🌖 '
-             f'для тебя столик в ресторанах 🥗 и барах🍹города {user_city}'
-    )
-
-    bot.send_message(
-        chat_id=chat_id,
-        text='Для этого нажми👇 кнопку 🛎\n <strong>Бронировать столик</strong> 🍽 и впиши '
-             'название заведения в поиске или воспользуйся 🆕 новой услугой\n🛍 '
-             '<strong>Заказ еды с собой</strong>',
+        text=f'Я готов забронировать 🌖 \n'
+             f'для тебя столик в ресторанах 🥗 и барах🍹города {user_city}\n\n'
+             f'Для этого нажми👇 кнопку 🛎 <strong>Бронировать столик</strong> 🍽 и впиши '
+             f'название заведения в поиске или воспользуйся 🆕 новой услугой\n🛍 '
+             f'<strong>Заказ еды с собой</strong>',
         reply_markup=keyboard,
         parse_mode=ParseMode.HTML
     )
