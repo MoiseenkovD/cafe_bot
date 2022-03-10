@@ -34,12 +34,10 @@ def start(update: Update, context: CallbackContext):
              " I'm here to help you find and make reservations at any restaurant.",
     )
 
-    cities = list(map(lambda city: city.name, Cities.objects.all()))
-
     city_buttons = []
 
-    for city in cities:
-        city_buttons.append([InlineKeyboardButton(str(city), callback_data=f'set_city:{city}')])
+    for city in Cities.objects.all():
+        city_buttons.append([InlineKeyboardButton(str(city.name), callback_data=f'set_city:{city.id}')])
 
     city_keyboard = InlineKeyboardMarkup(city_buttons)
 

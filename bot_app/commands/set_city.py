@@ -16,7 +16,7 @@ def set_city(update: Update, context: CallbackContext, payload):
 
     user = Users.objects.get(chat_id=query.message.chat_id)
 
-    city = Cities.objects.get(name=payload[0])
+    city = Cities.objects.get(pk=payload[0])
 
     user.city = city
 
@@ -27,5 +27,5 @@ def set_city(update: Update, context: CallbackContext, payload):
     messages.send_ready_for_booking_message(
         context.bot,
         update.callback_query.message.chat_id,
-        payload[0]
+        user.city.name
     )
