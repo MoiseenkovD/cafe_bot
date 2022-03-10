@@ -18,7 +18,7 @@ def set_city(update: Update, context: CallbackContext, payload):
 
     city = Cities.objects.get(name=payload[0])
 
-    user.city_id = city
+    user.city = city
 
     user.save()
 

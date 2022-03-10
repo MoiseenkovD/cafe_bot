@@ -7,7 +7,7 @@ class RestaurantsAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'name',
-        'city',
+        'city_name',
         'phone_number',
         'address',
         'open_at',
@@ -19,7 +19,7 @@ class RestaurantsAdmin(admin.ModelAdmin):
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(RestaurantsAdmin, self).get_form(request, obj, **kwargs)
-        form.base_fields['city_id'].label_from_instance = lambda inst: f"{inst.name}"
+        form.base_fields['city'].label_from_instance = lambda inst: f"{inst.name}"
         return form
 
 
@@ -44,7 +44,7 @@ class UsersAdmin(admin.ModelAdmin):
 
     def get_form(self, request, obj=None, **kwargs):
         form = super(UsersAdmin, self).get_form(request, obj, **kwargs)
-        form.base_fields['city_id'].label_from_instance = lambda inst: f"{inst.name}"
+        form.base_fields['city'].label_from_instance = lambda inst: f"{inst.name}"
         return form
 
     def has_add_permission(self, request):
