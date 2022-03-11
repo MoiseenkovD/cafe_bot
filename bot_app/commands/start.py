@@ -34,20 +34,18 @@ def start(update: Update, context: CallbackContext):
              " I'm here to help you find and make reservations at any restaurant.",
     )
 
-    cities = list(map(lambda city: city.name, Cities.objects.all()))
-
     city_buttons = []
 
-    for city in cities:
-        city_buttons.append([InlineKeyboardButton(str(city), callback_data=f'set_city:{city}')])
+    for city in Cities.objects.all():
+        city_buttons.append([InlineKeyboardButton(str(city.name), callback_data=f'set_city:{city.id}')])
 
     city_keyboard = InlineKeyboardMarkup(city_buttons)
 
-    if user.city_id is None:
+    if user.city is None:
         context.bot.send_message(
             chat_id=update.message.chat_id,
             text="In which city are we looking for venue?",
             reply_markup=city_keyboard
         )
     else:
-        messages.send_ready_for_booking_message(context.bot, update.message.chat_id, user.city_id.name)
+        messages.send_ready_for_booking_message(context.bot, update.message.chat_id, user.city.name)

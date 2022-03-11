@@ -9,7 +9,7 @@ import bot_app.commands as commands
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "cafe_bot.settings")
 django.setup()
 
-from bot_app.models import Restaurants
+from bot_app.models import Restaurants, Users
 
 bot = Updater(token=configs['TOKEN'], use_context=True)
 
@@ -23,6 +23,8 @@ def button(update: Update, context: CallbackContext):
 
     if command == 'set_city':
         commands.set_city(update, context, payload)
+    elif command == 'change_city':
+        commands.change_city(update, context, payload)
 
 
 def inline(update: Update, context: CallbackContext):

@@ -22,10 +22,10 @@ class Restaurants(models.Model):
     photo = models.FileField(upload_to='photos')
     rating = models.FloatField()
     is_delivery = models.BooleanField()
-    city_id = models.ForeignKey('bot_app.Cities', on_delete=models.CASCADE, verbose_name='city')
+    city = models.ForeignKey('bot_app.Cities', on_delete=models.CASCADE, verbose_name='city')
 
-    def city(self):
-        return self.city_id.name
+    def city_name(self):
+        return self.city.name
 
     def image(self):
         if self.photo != '':
@@ -42,7 +42,7 @@ class Users(models.Model):
     last_name = models.CharField(max_length=100, default=None, blank=True, null=True)
     username = models.CharField(max_length=100, default=None, blank=True, null=True)
     chat_id = models.CharField(max_length=20)
-    city_id = models.ForeignKey('bot_app.Cities',
+    city = models.ForeignKey('bot_app.Cities',
                              on_delete=models.CASCADE,
                              verbose_name='city',
                              default=None,
@@ -50,9 +50,9 @@ class Users(models.Model):
                              null=True)
 
     def city_name(self):
-        if self.city_id is None:
+        if self.city is None:
             return '-'
-        return self.city_id.name
+        return self.city.name
 
     class Meta:
         verbose_name = 'user'
