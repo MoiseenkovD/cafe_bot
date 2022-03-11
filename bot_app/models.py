@@ -22,6 +22,8 @@ class Restaurants(models.Model):
     photo = models.FileField(upload_to='photos')
     rating = models.FloatField()
     is_delivery = models.BooleanField()
+    lat = models.FloatField(default=None, blank=True, null=True)
+    lng = models.FloatField(default=None, blank=True, null=True)
     city = models.ForeignKey('bot_app.Cities', on_delete=models.CASCADE, verbose_name='city')
 
     def city_name(self):
@@ -58,3 +60,28 @@ class Users(models.Model):
         verbose_name = 'user'
         verbose_name_plural = 'Users'
         db_table = "users"
+
+
+class RestaurantsMenu(models.Model):
+    restaurant = models.ForeignKey(
+        'bot_app.Restaurants',
+        on_delete=models.CASCADE,
+        verbose_name='restaurant',
+        default=None,
+        blank=True,
+        null=True
+    )
+    image = models.FileField(upload_to='photos')
+    type = models.CharField(max_length=10, choices=mch.TYPE_CHOICES, default=mch.MENU)
+
+    def restaurant_name(self):
+        return self.restaurant.name
+
+    def photo(self):
+        if self.image != '':
+            return mark_safe('<img src="/%s" width="50" height="40" />' % (self.image))
+
+    class Meta:
+        verbose_name = 'restaurant_menu'
+        verbose_name_plural = 'Restaurants Menu'
+        db_table = "restaurants_menu"

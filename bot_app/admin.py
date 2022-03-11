@@ -1,5 +1,20 @@
 from django.contrib import admin
-from .models import Restaurants, Cities, Users
+from .models import Restaurants, Cities, Users, RestaurantsMenu
+
+
+@admin.register(RestaurantsMenu)
+class RestaurantsMenuAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'restaurant_name',
+        'photo',
+        'type',
+    )
+
+    def get_form(self, request, obj=None, **kwargs):
+        form = super(RestaurantsMenuAdmin, self).get_form(request, obj, **kwargs)
+        form.base_fields['restaurant'].label_from_instance = lambda inst: f"{inst.name}"
+        return form
 
 
 @admin.register(Restaurants)
