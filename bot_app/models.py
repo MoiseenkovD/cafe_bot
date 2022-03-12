@@ -72,7 +72,7 @@ class RestaurantsMenu(models.Model):
         null=True
     )
     image = models.FileField(upload_to='photos')
-    type = models.CharField(max_length=10, choices=mch.TYPE_CHOICES, default=mch.MENU)
+    type = models.CharField(max_length=10, choices=mch.TYPE_CHOICES, default=mch.DRAFT)
 
     def restaurant_name(self):
         return self.restaurant.name
@@ -85,3 +85,40 @@ class RestaurantsMenu(models.Model):
         verbose_name = 'restaurant_menu'
         verbose_name_plural = 'Restaurants Menu'
         db_table = "restaurants_menu"
+
+
+class Reservations(models.Model):
+    restaurant = models.ForeignKey(
+        'bot_app.Restaurants',
+        on_delete=models.CASCADE,
+        verbose_name='restaurant'
+    )
+    user = models.ForeignKey(
+        'bot_app.Users',
+        on_delete=models.CASCADE,
+        verbose_name='user'
+    )
+    date = models.DateField()
+    time = models.CharField(max_length=10)
+    place = models.CharField(max_length=50)
+    number_of_people = models.SmallIntegerField()
+    contact_name = models.CharField(max_length=50)
+    contact_phone_number = models.CharField(max_length=20)
+    status = models.CharField(max_length=30, choices=mch.STATUS_CHOICES, default=mch.MENU)
+    comment_by_restaurant = models.CharField(
+        max_length=300,
+        default=None,
+        blank=True,
+        null=True
+    )
+
+    def restaurant_name(self):
+        return self.restaurant.name
+
+    def user_name(self):
+        return self.user.username
+
+    class Meta:
+        verbose_name = 'reservations'
+        verbose_name_plural = 'Reservations'
+        db_table = "reservations"
