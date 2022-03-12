@@ -14,7 +14,7 @@ def get_menu(update: Update, context: CallbackContext, payload):
 
     restaurant_menu_items = RestaurantsMenu.objects.filter(
         restaurant=payload[0],
-        type='MENU'
+        type=payload[1]
     )
 
     context.bot.send_media_group(
