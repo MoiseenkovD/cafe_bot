@@ -33,6 +33,8 @@ def button(update: Update, context: CallbackContext):
         commands.get_contacts(update, context, payload)
     elif command == 'get_menu':
         commands.get_menu(update, context, payload)
+    elif command == 'reserve_table':
+        commands.reserve_table(update, context, payload)
 
 
 def inline(update: Update, context: CallbackContext):
@@ -64,7 +66,7 @@ def on_select_cafe(update: Update, context: CallbackContext) -> None:
         [
             InlineKeyboardButton(
                 '🛎 Бронировать столик 🍽',
-                callback_data='🛎 Бронировать столик 🍽'
+                callback_data=f'reserve_table:Бронировать столик'
             )
         ],
         [
