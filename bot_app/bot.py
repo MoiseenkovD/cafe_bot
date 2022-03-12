@@ -66,13 +66,13 @@ def on_select_cafe(update: Update, context: CallbackContext) -> None:
         [
             InlineKeyboardButton(
                 '🛎 Бронировать столик 🍽',
-                callback_data=f'reserve_table:Бронировать столик'
+                callback_data=f'reserve_table:{restaurant.id}'
             )
         ],
         [
             InlineKeyboardButton(
                 '🛍 Заказ еды с собой',
-                callback_data='🛍 Заказ еды с собой'
+                callback_data='1'
             )
         ],
         [

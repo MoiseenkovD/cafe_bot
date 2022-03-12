@@ -91,19 +91,20 @@ class Reservations(models.Model):
     restaurant = models.ForeignKey(
         'bot_app.Restaurants',
         on_delete=models.CASCADE,
-        verbose_name='restaurant'
+        verbose_name='restaurant',
+        null=True
     )
     user = models.ForeignKey(
         'bot_app.Users',
         on_delete=models.CASCADE,
         verbose_name='user'
     )
-    date = models.DateField()
-    time = models.CharField(max_length=10)
-    place = models.CharField(max_length=50)
-    number_of_people = models.SmallIntegerField()
-    contact_name = models.CharField(max_length=50)
-    contact_phone_number = models.CharField(max_length=20)
+    date = models.DateField(null=True)
+    time = models.CharField(max_length=10, null=True)
+    place = models.CharField(max_length=50, null=True)
+    number_of_people = models.SmallIntegerField(null=True)
+    contact_name = models.CharField(max_length=50, null=True)
+    contact_phone_number = models.CharField(max_length=20, null=True)
     status = models.CharField(max_length=30, choices=mch.STATUS_CHOICES, default=mch.MENU)
     comment_by_restaurant = models.CharField(
         max_length=300,
@@ -113,6 +114,9 @@ class Reservations(models.Model):
     )
 
     def restaurant_name(self):
+        if self.restaurant is None:
+            return ''
+
         return self.restaurant.name
 
     def user_name(self):
