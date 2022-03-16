@@ -31,6 +31,12 @@ def reserve_table(update: Update, context: CallbackContext, payload):
     )
 
     reservation.restaurant = restaurant
+    reservation.date = None
+    reservation.time = None
+    reservation.place = None
+    reservation.number_of_people = None
+    reservation.contact_name = None
+    reservation.contact_phone_number = None
     reservation.save()
 
     keyboard = ReplyKeyboardMarkup(list(map(

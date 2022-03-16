@@ -16,7 +16,7 @@ def send_ready_for_booking_message(bot: Bot, chat_id: int, user_city: str):
             )
         ],
         [
-            InlineKeyboardButton('📝 My bookings', callback_data='📝 My bookings'),
+            InlineKeyboardButton('📝 My bookings', callback_data='my_bookings'),
             InlineKeyboardButton('🏙 Change city', callback_data='change_city')
         ]
     ])

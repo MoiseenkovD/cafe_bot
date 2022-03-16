@@ -102,8 +102,8 @@ class Reservations(models.Model):
     date = models.DateField(null=True)
     time = models.CharField(max_length=10, null=True)
     place = models.CharField(max_length=50, null=True)
-    number_of_people = models.SmallIntegerField(null=True)
-    contact_name = models.CharField(max_length=50, null=True)
+    number_of_people = models.CharField(max_length=50, null=True)
+    contact_name = models.CharField(max_length=30, null=True)
     contact_phone_number = models.CharField(max_length=20, null=True)
     status = models.CharField(max_length=30, choices=mch.STATUS_CHOICES, default=mch.MENU)
     comment_by_restaurant = models.CharField(
