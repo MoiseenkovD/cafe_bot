@@ -1,14 +1,20 @@
-KYIV = 1
-DNIPRO = 2
-LVIV = 3
-KHARKIV = 4
-ODESSA = 5
-
+MENU = 'MENU'
+BAR = 'BAR'
 
 TYPE_CHOICES = (
-    (KYIV, 'Kyiv'),
-    (DNIPRO, 'Dnipro'),
-    (LVIV, 'Lviv'),
-    (KHARKIV, 'Kharkiv'),
-    (ODESSA, 'Odessa'),
+    (MENU, MENU),
+    (BAR, BAR),
 )
+
+DRAFT = 'DRAFT'
+ON_REVIEW = 'ON_REVIEW'
+APPROVED = 'APPROVED'
+REJECTED = 'REJECTED'
+
+STATUS_CHOICES = (
+    (DRAFT, DRAFT),
+    (ON_REVIEW, ON_REVIEW),
+    (APPROVED, APPROVED),
+    (REJECTED, REJECTED),
+)
+

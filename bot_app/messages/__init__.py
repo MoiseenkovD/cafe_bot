@@ -1,0 +1,1 @@
+from bot_app.messages.send_ready_for_booking_message import *
