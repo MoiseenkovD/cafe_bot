@@ -19,6 +19,7 @@ class Restaurants(models.Model):
     address = models.CharField(max_length=100)
     open_at = models.CharField(max_length=20)
     close_at = models.CharField(max_length=20)
+    places = models.CharField(max_length=150, null=True)
     photo = models.FileField(upload_to='photos')
     rating = models.FloatField()
     is_delivery = models.BooleanField()

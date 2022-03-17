@@ -130,9 +130,12 @@ def on_reservation(update: Update, context: CallbackContext) -> None:
         time = dt.datetime.strptime(open_at_str, '%H:%M')
         close_at = dt.datetime.strptime(close_at_str, '%H:%M')
 
+        if time > close_at:
+            close_at = close_at + dt.timedelta(hours=24)
+
         time_buttons = []
 
-        while time <= close_at:
+        while time < close_at:
             time_buttons.append(KeyboardButton(time.strftime('%H:%M')))
             time = time + dt.timedelta(minutes=15)
 
@@ -150,12 +153,12 @@ def on_reservation(update: Update, context: CallbackContext) -> None:
         )
     elif reservation.time is None:
 
-        keyboard = ReplyKeyboardMarkup([
-            [KeyboardButton('Не имеет значение')],
-            [KeyboardButton('Терасса')],
-            [KeyboardButton('Основной зал')],
-            [KeyboardButton('Балкон')],
-        ])
+        places = reservation.restaurant.places.split(',')
+
+        keyboard = ReplyKeyboardMarkup(list(map(
+            lambda place: [KeyboardButton(place.strip())],
+            places
+        )))
 
         reservation.time = update.message.text
         reservation.save()

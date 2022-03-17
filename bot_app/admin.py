@@ -27,6 +27,7 @@ class RestaurantsAdmin(admin.ModelAdmin):
         'address',
         'open_at',
         'close_at',
+        'places',
         'image',
         'rating',
         'is_delivery',
